@@ -24,7 +24,23 @@ public class Main {
     }
 
     // Umrechnung von Ausgangswert in Zwischenwert
-    private static void binaerZuDezimal(char[] ausgangswert) {}
+    private static char[] binaerZuDezimal(char[] ausgangswert) throws Exception {
+        for (char ziffer : ausgangswert) {
+            if (ziffer != '0' && ziffer != '1') {
+                throw new Exception("Die Ziffern entsprechen nicht den Vorraussetzungen (0,1)");
+            }
+        }
+        int zaehler = 1;
+        int ergebnis = 0;
+
+        for (int a = ausgangswert.length - 1; a >= 0; a--) {
+            int binaerZiffer = Character.getNumericValue(ausgangswert[a]);
+            ergebnis += binaerZiffer * zaehler;
+            zaehler = zaehler * 2;
+        }
+        return ("" + ergebnis).toCharArray();
+    }
+    
     private static char[] oktalZuDezimal(char[] ausgangswert) throws Exception {
         for (char ziffer : ausgangswert) {
             if (ziffer != '0' && ziffer != '1'&& ziffer != '2'
