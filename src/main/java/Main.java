@@ -22,4 +22,14 @@ public class Main {
 
         //zwischenwert = toInteger(ausgangswert, ausgangssystem);
     }
+
+    // Umrechnung von Ausgangswert in Zwischenwert
+    private static void binaerZuDezimal(char[] ausgangswert) {}
+    private static void oktalZuDezimal(char[] ausgangswert) {}
+    private static void hexadezimalZuDezimal(char[] ausgangswert) {}
+
+    // Umrechnung von Zwischenwert in Zielwert
+    private static void dezimalZuBinaer(char[] zwischenwert) {}
+    private static void dezimalZuOktal(char[] zwischenwert) {}
+    private static void dezimalZuHexadezimal(char[] zwischenwert) {}
 }
