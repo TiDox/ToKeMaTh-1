@@ -25,37 +25,73 @@ public class Main {
 
     // Umrechnung von Ausgangswert in Zwischenwert
     private static char[] binaerZuDezimal(char[] ausgangswert) throws Exception {
+        boolean kommaEnthalten = false;
+        String zahl = "";
         for (char ziffer : ausgangswert) {
-            if (ziffer != '0' && ziffer != '1') {
-                throw new Exception("Die Ziffern entsprechen nicht den Vorraussetzungen (0,1)");
+            zahl += ziffer;
+            if (ziffer == ',') {
+                kommaEnthalten = true;
             }
         }
-        int zaehler = 1;
-        int ergebnis = 0;
+        String[] number = zahl.split(",");
+        if (number.length > 2) {
+            throw new Exception("Der Wert beeinhaltet zu viele Kommastellen");
+        }
+        char[] partOne = number[0].toCharArray();
+        double zwischenErgebnis = 0;
+        double zaehler = 1;
+        double ergebnis = 0;
 
-        for (int a = ausgangswert.length - 1; a >= 0; a--) {
-            int binaerZiffer = Character.getNumericValue(ausgangswert[a]);
-            ergebnis += binaerZiffer * zaehler;
+        for (int a = partOne.length - 1; a >= 0; a--) {
+            int oktalZiffer = Character.getNumericValue(partOne[a]);
+            ergebnis += oktalZiffer * zaehler;
             zaehler = zaehler * 2;
+        }
+        if (kommaEnthalten) {
+            zaehler = 1;
+            char[] partTwo = number[1].toCharArray();
+            for (int a = partTwo.length - 1; a >= 0; a--) {
+                int oktalZiffer = Character.getNumericValue(partTwo[a]);
+                zwischenErgebnis += oktalZiffer * zaehler;
+                zaehler = zaehler * 2;
+            }
+            ergebnis += zwischenErgebnis / zaehler;
         }
         return ("" + ergebnis).toCharArray();
     }
-    
+
     private static char[] oktalZuDezimal(char[] ausgangswert) throws Exception {
+        boolean kommaEnthalten = false;
+        String zahl = "";
         for (char ziffer : ausgangswert) {
-            if (ziffer != '0' && ziffer != '1'&& ziffer != '2'
-                    && ziffer != '3'&& ziffer != '4'&& ziffer != '5'
-                    && ziffer != '6' && ziffer != '7') {
-                throw new Exception("Die Zffern befinden sich nicht im Bereich von 0 - 7");
+            zahl += ziffer;
+            if (ziffer == ',') {
+                kommaEnthalten = true;
             }
         }
-        int zaehler = 1;
-        int ergebnis = 0;
+        String[] number = zahl.split(",");
+        if (number.length > 2) {
+            throw new Exception("Der Wert beeinhaltet zu viele Kommastellen");
+        }
+        char[] partOne = number[0].toCharArray();
+        double zwischenErgebnis = 0;
+        double zaehler = 1;
+        double ergebnis = 0;
 
-        for (int a = ausgangswert.length - 1; a >= 0; a--) {
-            int oktalZiffer = Character.getNumericValue(ausgangswert[a]);
+        for (int a = partOne.length - 1; a >= 0; a--) {
+            int oktalZiffer = Character.getNumericValue(partOne[a]);
             ergebnis += oktalZiffer * zaehler;
             zaehler = zaehler * 8;
+        }
+        if (kommaEnthalten) {
+            zaehler = 1;
+            char[] partTwo = number[1].toCharArray();
+            for (int a = partTwo.length - 1; a >= 0; a--) {
+                int oktalZiffer = Character.getNumericValue(partTwo[a]);
+                zwischenErgebnis += oktalZiffer * zaehler;
+                zaehler = zaehler * 8;
+            }
+            ergebnis += zwischenErgebnis / zaehler;
         }
         return ("" + ergebnis).toCharArray();
     }
